@@ -46,6 +46,14 @@ Before installing the bridge, ensure you have:
 
 ## Azure AD Setup
 
+You can configure Azure AD using either the Azure Portal (GUI) or Azure CLI (command line).
+
+**Choose your method:**
+- **[Azure Portal](#azure-portal-setup)** - Visual interface (below)
+- **[Azure CLI](azure-cli-setup.md)** - Command line (recommended for automation and AI agents)
+
+### Azure Portal Setup
+
 ### 1. Create Azure AD Application
 
 1. Go to [Azure Portal](https://portal.azure.com)

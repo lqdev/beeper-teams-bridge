@@ -7,6 +7,7 @@ A Matrix bridge for Microsoft Teams, built with [mautrix-go](https://github.com/
 [![License](https://img.shields.io/github/license/lqdev/beeper-teams-bridge)](LICENSE)
 [![Matrix Room](https://img.shields.io/matrix/teams:maunium.net?label=%23teams:maunium.net&logo=matrix&server_fqdn=maunium.net)](https://matrix.to/#/#teams:maunium.net)
 [![GitHub release](https://img.shields.io/github/v/release/lqdev/beeper-teams-bridge)](https://github.com/lqdev/beeper-teams-bridge/releases)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lqdev/beeper-teams-bridge)
 
 Bridge Microsoft Teams channels and chats to Matrix, allowing you to send and receive messages from Teams within your Matrix client (like Beeper).
 
@@ -72,6 +73,20 @@ See [docs/setup.md](docs/setup.md#azure-ad-setup) for detailed instructions.
 ## 🚀 Quick Start
 
 ### 1. Installation
+
+#### Using GitHub Codespaces (Easiest)
+
+Get started in seconds with a fully configured cloud development environment:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lqdev/beeper-teams-bridge)
+
+- ✅ Pre-configured Go 1.21+ environment
+- ✅ PostgreSQL database ready to use
+- ✅ All development tools installed
+- ✅ Azure CLI and GitHub CLI included
+- ✅ VS Code with recommended extensions
+
+See [Codespaces Guide](docs/codespaces.md) for detailed instructions.
 
 #### Using Docker (Recommended)
 ```bash
@@ -214,6 +229,8 @@ sudo systemctl enable beeper-teams-bridge
 - **[Configuration Reference](docs/configuration.md)** - All config options explained
 - **[User Guide](docs/usage.md)** - How to use the bridge
 - **[Troubleshooting](docs/troubleshooting.md)** - Common issues and solutions
+- **[GitHub Codespaces Guide](docs/codespaces.md)** - Develop in the cloud
+- **[Azure CLI Setup](docs/azure-cli-setup.md)** - Configure Azure AD with CLI
 
 ### Developer Documentation
 - **[Architecture Overview](docs/architecture.md)** - Technical design
@@ -297,6 +314,16 @@ See [docs/architecture.md](docs/architecture.md) for detailed technical informat
 ## 🔧 Development
 
 ### Setting Up Development Environment
+
+#### Option 1: GitHub Codespaces (Recommended)
+
+The fastest way to start developing:
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/lqdev/beeper-teams-bridge)
+
+Everything is pre-configured and ready to use. See [Codespaces Guide](docs/codespaces.md).
+
+#### Option 2: Local Development
 
 ```bash
 # Clone the repository
