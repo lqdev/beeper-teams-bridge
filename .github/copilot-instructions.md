@@ -16,7 +16,7 @@ beeper-teams-bridge is a Matrix bridge for Microsoft Teams, built with [mautrix-
 
 ## Technology Stack
 
-- **Language**: Go 1.21+
+- **Language**: Go 1.21+ (as specified in go.mod)
 - **Framework**: mautrix-go bridge framework
 - **Database**: PostgreSQL 10+
 - **External APIs**: Microsoft Graph API
@@ -301,7 +301,7 @@ Key dependencies:
 ## Troubleshooting Common Issues
 
 ### Build Failures
-- Ensure Go 1.21+ is installed
+- Ensure Go 1.21+ is installed (as specified in go.mod)
 - Run `go mod download` to fetch dependencies
 - Check for syntax errors with `go vet`
 
