@@ -2,11 +2,11 @@
 
 A Matrix bridge for Microsoft Teams, built with [mautrix-go](https://github.com/mautrix/go).
 
-[![CI Status](https://img.shields.io/github/actions/workflow/status/yourorg/beeper-teams-bridge/ci.yml?branch=main)](https://github.com/yourorg/beeper-teams-bridge/actions)
-[![Go Report Card](https://goreportcard.com/badge/github.com/yourorg/beeper-teams-bridge)](https://goreportcard.com/report/github.com/yourorg/beeper-teams-bridge)
-[![License](https://img.shields.io/github/license/yourorg/beeper-teams-bridge)](LICENSE)
+[![CI Status](https://img.shields.io/github/actions/workflow/status/lqdev/beeper-teams-bridge/ci.yml?branch=main)](https://github.com/lqdev/beeper-teams-bridge/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/lqdev/beeper-teams-bridge)](https://goreportcard.com/report/github.com/lqdev/beeper-teams-bridge)
+[![License](https://img.shields.io/github/license/lqdev/beeper-teams-bridge)](LICENSE)
 [![Matrix Room](https://img.shields.io/matrix/teams:maunium.net?label=%23teams:maunium.net&logo=matrix&server_fqdn=maunium.net)](https://matrix.to/#/#teams:maunium.net)
-[![GitHub release](https://img.shields.io/github/v/release/yourorg/beeper-teams-bridge)](https://github.com/yourorg/beeper-teams-bridge/releases)
+[![GitHub release](https://img.shields.io/github/v/release/lqdev/beeper-teams-bridge)](https://github.com/lqdev/beeper-teams-bridge/releases)
 
 Bridge Microsoft Teams channels and chats to Matrix, allowing you to send and receive messages from Teams within your Matrix client (like Beeper).
 
@@ -79,22 +79,22 @@ See [docs/setup.md](docs/setup.md#azure-ad-setup) for detailed instructions.
 mkdir beeper-teams-bridge && cd beeper-teams-bridge
 
 # Pull the latest image
-docker pull ghcr.io/yourorg/beeper-teams-bridge:latest
+docker pull ghcr.io/lqdev/beeper-teams-bridge:latest
 
 # Generate config
-docker run --rm -v $(pwd):/data ghcr.io/yourorg/beeper-teams-bridge:latest -e
+docker run --rm -v $(pwd):/data ghcr.io/lqdev/beeper-teams-bridge:latest -e
 
 # Edit config.yaml with your settings
 nano config.yaml
 
 # Generate registration file
-docker run --rm -v $(pwd):/data ghcr.io/yourorg/beeper-teams-bridge:latest -g
+docker run --rm -v $(pwd):/data ghcr.io/lqdev/beeper-teams-bridge:latest -g
 ```
 
 #### Using Pre-built Binary
 ```bash
 # Download latest release
-wget https://github.com/yourorg/beeper-teams-bridge/releases/latest/download/beeper-teams-bridge-linux-amd64
+wget https://github.com/lqdev/beeper-teams-bridge/releases/latest/download/beeper-teams-bridge-linux-amd64
 chmod +x beeper-teams-bridge-linux-amd64
 mv beeper-teams-bridge-linux-amd64 beeper-teams-bridge
 
@@ -111,7 +111,7 @@ nano config.yaml
 #### Building from Source
 ```bash
 # Clone the repository
-git clone https://github.com/yourorg/beeper-teams-bridge.git
+git clone https://github.com/lqdev/beeper-teams-bridge.git
 cd beeper-teams-bridge
 
 # Install dependencies
@@ -183,7 +183,7 @@ docker run -d \
   --restart unless-stopped \
   -v $(pwd):/data \
   -p 29319:29319 \
-  ghcr.io/yourorg/beeper-teams-bridge:latest
+  ghcr.io/lqdev/beeper-teams-bridge:latest
 ```
 
 #### Systemd
@@ -300,7 +300,7 @@ See [docs/architecture.md](docs/architecture.md) for detailed technical informat
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourorg/beeper-teams-bridge.git
+git clone https://github.com/lqdev/beeper-teams-bridge.git
 cd beeper-teams-bridge
 
 # Install dependencies
@@ -483,7 +483,7 @@ SOFTWARE.
 
 ### Get Help
 - **Matrix Room:** [#teams:maunium.net](https://matrix.to/#/#teams:maunium.net)
-- **GitHub Issues:** [Report bugs or request features](https://github.com/yourorg/beeper-teams-bridge/issues)
+- **GitHub Issues:** [Report bugs or request features](https://github.com/lqdev/beeper-teams-bridge/issues)
 - **Documentation:** [Read the docs](docs/)
 
 ### Community
@@ -515,7 +515,7 @@ SOFTWARE.
 - [ ] Full Adaptive Card rendering
 - [ ] Teams apps integration
 
-See [GitHub Milestones](https://github.com/yourorg/beeper-teams-bridge/milestones) for detailed progress.
+See [GitHub Milestones](https://github.com/lqdev/beeper-teams-bridge/milestones) for detailed progress.
 
 ---
 
@@ -532,7 +532,7 @@ See [GitHub Milestones](https://github.com/yourorg/beeper-teams-bridge/milestone
 
 ## ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=yourorg/beeper-teams-bridge&type=Date)](https://star-history.com/#yourorg/beeper-teams-bridge&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=lqdev/beeper-teams-bridge&type=Date)](https://star-history.com/#lqdev/beeper-teams-bridge&Date)
 
 If you find this project useful, please consider giving it a star! ⭐
 
