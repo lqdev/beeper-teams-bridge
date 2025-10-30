@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: mautrix-teams-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: mautrix
+      POSTGRES_PASSWORD: mautrix
+      POSTGRES_DB: mautrix-teams
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U mautrix"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mautrix-teams:
+    build: .
+    container_name: mautrix-teams
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./config.yaml:/data/config.yaml:ro
+      - ./registration.yaml:/data/registration.yaml:ro
+      - ./logs:/data/logs
+    ports:
+      - "8080:8080"
+    environment:
+      - TZ=UTC
+
+volumes:
+  postgres_data:
