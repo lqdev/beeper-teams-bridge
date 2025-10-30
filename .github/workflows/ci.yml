@@ -7,60 +7,65 @@ on:
     branches: [ main, develop ]
 
 jobs:
-  build:
-    name: Build and Test
+  test:
     runs-on: ubuntu-latest
     
-    strategy:
-      matrix:
-        go-version: ['1.21', '1.22']
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: mautrix_teams_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
     
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
     
     - name: Set up Go
       uses: actions/setup-go@v5
       with:
-        go-version: ${{ matrix.go-version }}
+        go-version: '1.21'
     
     - name: Cache Go modules
       uses: actions/cache@v4
       with:
-        path: |
-          ~/.cache/go-build
-          ~/go/pkg/mod
-        key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('**/go.sum') }}
+        path: ~/go/pkg/mod
+        key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
         restore-keys: |
-          ${{ runner.os }}-go-${{ matrix.go-version }}-
+          ${{ runner.os }}-go-
     
     - name: Download dependencies
       run: go mod download
     
-    - name: Verify dependencies
-      run: go mod verify
-    
-    - name: Build
-      run: go build -v ./...
+    - name: Run linter
+      uses: golangci/golangci-lint-action@v6
+      with:
+        version: latest
     
     - name: Run tests
-      run: go test -v -race -coverprofile=coverage.out ./...
+      run: go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
+      env:
+        DATABASE_URL: postgres://postgres:test@localhost:5432/mautrix_teams_test?sslmode=disable
     
     - name: Upload coverage
       uses: codecov/codecov-action@v4
       with:
-        file: ./coverage.out
+        file: ./coverage.txt
         flags: unittests
-        name: codecov-umbrella
-      if: matrix.go-version == '1.21'
+    
+    - name: Build
+      run: go build -o mautrix-teams ./cmd/mautrix-teams
 
   lint:
-    name: Lint
     runs-on: ubuntu-latest
-    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
     
     - name: Set up Go
       uses: actions/setup-go@v5
@@ -68,10 +73,25 @@ jobs:
         go-version: '1.21'
     
     - name: golangci-lint
-      uses: golangci/golangci-lint-action@v4
+      uses: golangci/golangci-lint-action@v6
       with:
         version: latest
         args: --timeout=5m
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Run Gosec Security Scanner
+      uses: securego/gosec@master
+      with:
+        args: '-no-fail -fmt sarif -out results.sarif ./...'
+    
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: results.sarif
 
   docker:
     name: Docker Build

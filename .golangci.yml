@@ -1,8 +1,6 @@
 run:
   timeout: 5m
   tests: true
-  skip-dirs:
-    - vendor
 
 linters:
   enable:
@@ -11,16 +9,15 @@ linters:
     - govet
     - ineffassign
     - staticcheck
-    - typecheck
     - unused
     - gofmt
     - goimports
     - misspell
-    - unconvert
-    - unparam
-    - goconst
-    - gocyclo
+    - gocritic
     - gosec
+    - revive
+    - stylecheck
+    - unconvert
 
 linters-settings:
   errcheck:
@@ -30,20 +27,21 @@ linters-settings:
   govet:
     check-shadowing: true
   
-  gocyclo:
-    min-complexity: 15
+  gofmt:
+    simplify: true
   
-  goconst:
-    min-len: 3
-    min-occurrences: 3
+  misspell:
+    locale: US
+  
+  revive:
+    rules:
+      - name: exported
+        severity: warning
+        disabled: false
 
 issues:
-  exclude-use-default: false
-  max-issues-per-linter: 0
-  max-same-issues: 0
-  
   exclude-rules:
     - path: _test\.go
       linters:
-        - errcheck
         - gosec
+        - gocritic

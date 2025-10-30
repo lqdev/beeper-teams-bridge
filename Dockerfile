@@ -21,7 +21,7 @@ RUN go build -o mautrix-teams \
     -ldflags "-X main.Tag=$(git describe --exact-match --tags 2>/dev/null || echo 'unknown') \
               -X main.Commit=$(git rev-parse HEAD) \
               -X 'main.BuildTime=$(date -u +%Y-%m-%d\ %H:%M:%S)'" \
-    .
+    ./cmd/mautrix-teams
 
 # Runtime stage
 FROM alpine:latest
@@ -36,7 +36,7 @@ RUN adduser -D -u 1000 mautrix
 COPY --from=builder /build/mautrix-teams /usr/local/bin/mautrix-teams
 
 # Copy example config
-COPY --from=builder /build/example-config.yaml /opt/mautrix-teams/example-config.yaml
+COPY --from=builder /build/pkg/connector/example-config.yaml /opt/mautrix-teams/example-config.yaml
 
 # Create data directory
 RUN mkdir -p /data && chown mautrix:mautrix /data
