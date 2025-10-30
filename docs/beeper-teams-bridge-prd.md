@@ -1,6 +1,6 @@
 # Microsoft Teams Matrix Bridge - Product Requirements Document & Technical Specification
 
-**Project Name:** mautrix-teams  
+**Project Name:** beeper-teams-bridge  
 **Version:** 1.0  
 **Status:** Planning  
 **Author:** Development Team  
@@ -128,7 +128,7 @@ Microsoft Teams is a major enterprise communication platform with millions of us
 ┌─────────────────┐         ┌──────────────────┐         ┌─────────────────┐
 │                 │         │                  │         │                 │
 │  Matrix Client  │◄───────►│  Matrix Bridge   │◄───────►│ Microsoft Teams │
-│    (Beeper)     │         │  (mautrix-teams) │         │   (Graph API)   │
+│    (Beeper)     │         │  (beeper-teams-bridge) │         │   (Graph API)   │
 │                 │         │                  │         │                 │
 └─────────────────┘         └──────────────────┘         └─────────────────┘
                                     │
@@ -1114,7 +1114,7 @@ Fixes #127
 
 ### Directory Structure
 ```
-mautrix-teams/
+beeper-teams-bridge/
 ├── .github/
 │   ├── workflows/
 │   │   ├── ci.yml
@@ -1127,7 +1127,7 @@ mautrix-teams/
 │   ├── PULL_REQUEST_TEMPLATE.md
 │   └── dependabot.yml
 ├── cmd/
-│   └── mautrix-teams/
+│   └── beeper-teams-bridge/
 │       └── main.go
 ├── pkg/
 │   └── connector/
@@ -1297,19 +1297,19 @@ jobs:
         ./scripts/build.sh
         
         # Build for multiple platforms
-        GOOS=linux GOARCH=amd64 go build -o mautrix-teams-linux-amd64 ./cmd/mautrix-teams
-        GOOS=linux GOARCH=arm64 go build -o mautrix-teams-linux-arm64 ./cmd/mautrix-teams
-        GOOS=darwin GOARCH=amd64 go build -o mautrix-teams-darwin-amd64 ./cmd/mautrix-teams
-        GOOS=darwin GOARCH=arm64 go build -o mautrix-teams-darwin-arm64 ./cmd/mautrix-teams
+        GOOS=linux GOARCH=amd64 go build -o beeper-teams-bridge-linux-amd64 ./cmd/beeper-teams-bridge
+        GOOS=linux GOARCH=arm64 go build -o beeper-teams-bridge-linux-arm64 ./cmd/beeper-teams-bridge
+        GOOS=darwin GOARCH=amd64 go build -o beeper-teams-bridge-darwin-amd64 ./cmd/beeper-teams-bridge
+        GOOS=darwin GOARCH=arm64 go build -o beeper-teams-bridge-darwin-arm64 ./cmd/beeper-teams-bridge
     
     - name: Create Release
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          mautrix-teams-linux-amd64
-          mautrix-teams-linux-arm64
-          mautrix-teams-darwin-amd64
-          mautrix-teams-darwin-arm64
+          beeper-teams-bridge-linux-amd64
+          beeper-teams-bridge-linux-arm64
+          beeper-teams-bridge-darwin-amd64
+          beeper-teams-bridge-darwin-arm64
         generate_release_notes: true
         draft: false
         prerelease: false
@@ -1379,7 +1379,7 @@ body:
     id: version
     attributes:
       label: Bridge Version
-      description: What version of mautrix-teams are you running?
+      description: What version of beeper-teams-bridge are you running?
       placeholder: v1.0.0
     validations:
       required: true
@@ -1499,7 +1499,7 @@ issues:
 
 #### `README.md` Structure
 ```markdown
-# mautrix-teams
+# beeper-teams-bridge
 
 A Matrix bridge for Microsoft Teams, built with mautrix-go.
 
@@ -1564,7 +1564,7 @@ Licensed under the [MIT License](LICENSE). See LICENSE file for details.
 
 #### `CONTRIBUTING.md`
 ```markdown
-# Contributing to mautrix-teams
+# Contributing to beeper-teams-bridge
 
 Thank you for your interest in contributing!
 
@@ -1821,7 +1821,7 @@ func TestE2E_MessageBridging(t *testing.T) {
 ### Test Organization
 
 ```
-mautrix-teams/
+beeper-teams-bridge/
 ├── pkg/connector/
 │   ├── connector_test.go
 │   ├── client_test.go
@@ -1948,19 +1948,19 @@ COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . .
-RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o mautrix-teams ./cmd/mautrix-teams
+RUN CGO_ENABLED=0 go build -ldflags="-s -w" -o beeper-teams-bridge ./cmd/beeper-teams-bridge
 
 FROM alpine:latest
 
 RUN apk --no-cache add ca-certificates tzdata
 
 WORKDIR /data
-COPY --from=builder /build/mautrix-teams /usr/local/bin/
+COPY --from=builder /build/beeper-teams-bridge /usr/local/bin/
 
 RUN adduser -D -u 1337 mautrix
 USER mautrix
 
-ENTRYPOINT ["/usr/local/bin/mautrix-teams"]
+ENTRYPOINT ["/usr/local/bin/beeper-teams-bridge"]
 CMD ["-c", "/data/config.yaml"]
 ```
 
@@ -1969,9 +1969,9 @@ CMD ["-c", "/data/config.yaml"]
 version: '3.8'
 
 services:
-  mautrix-teams:
+  beeper-teams-bridge:
     image: mautrix/teams:latest
-    container_name: mautrix-teams
+    container_name: beeper-teams-bridge
     restart: unless-stopped
     ports:
       - "29319:29319"
@@ -1986,7 +1986,7 @@ services:
 
   postgres:
     image: postgres:15-alpine
-    container_name: mautrix-teams-db
+    container_name: beeper-teams-bridge-db
     restart: unless-stopped
     environment:
       POSTGRES_DB: mautrix_teams
@@ -2007,17 +2007,17 @@ networks:
 
 #### 2. Systemd Service
 
-**`/etc/systemd/system/mautrix-teams.service`:**
+**`/etc/systemd/system/beeper-teams-bridge.service`:**
 ```ini
 [Unit]
-Description=mautrix-teams bridge
+Description=beeper-teams-bridge bridge
 After=network.target postgresql.service
 
 [Service]
 Type=exec
-User=mautrix-teams
-WorkingDirectory=/opt/mautrix-teams
-ExecStart=/opt/mautrix-teams/mautrix-teams -c /opt/mautrix-teams/config.yaml
+User=beeper-teams-bridge
+WorkingDirectory=/opt/beeper-teams-bridge
+ExecStart=/opt/beeper-teams-bridge/beeper-teams-bridge -c /opt/beeper-teams-bridge/config.yaml
 
 Restart=on-failure
 RestartSec=30s
@@ -2027,7 +2027,7 @@ NoNewPrivileges=yes
 PrivateTmp=yes
 ProtectSystem=strict
 ProtectHome=yes
-ReadWritePaths=/opt/mautrix-teams
+ReadWritePaths=/opt/beeper-teams-bridge
 CapabilityBoundingSet=
 
 [Install]
@@ -2041,20 +2041,20 @@ WantedBy=multi-user.target
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mautrix-teams
+  name: beeper-teams-bridge
   namespace: matrix
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mautrix-teams
+      app: beeper-teams-bridge
   template:
     metadata:
       labels:
-        app: mautrix-teams
+        app: beeper-teams-bridge
     spec:
       containers:
-      - name: mautrix-teams
+      - name: beeper-teams-bridge
         image: mautrix/teams:latest
         ports:
         - containerPort: 29319
@@ -2062,7 +2062,7 @@ spec:
         - name: DATABASE_URL
           valueFrom:
             secretKeyRef:
-              name: mautrix-teams-secret
+              name: beeper-teams-bridge-secret
               key: database-url
         volumeMounts:
         - name: config
@@ -2072,7 +2072,7 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: mautrix-teams-config
+          name: beeper-teams-bridge-config
 ```
 
 ### Monitoring & Observability
@@ -2142,7 +2142,7 @@ logging:
   # File output
   writers:
     - type: file
-      filename: /var/log/mautrix-teams/bridge.log
+      filename: /var/log/beeper-teams-bridge/bridge.log
       max_size: 100   # MB
       max_backups: 10
       max_age: 30     # days
@@ -2207,7 +2207,7 @@ func (tc *TeamsConnector) HealthCheck(w http.ResponseWriter, r *http.Request) {
 #!/bin/bash
 # scripts/backup.sh
 
-BACKUP_DIR="/var/backups/mautrix-teams"
+BACKUP_DIR="/var/backups/beeper-teams-bridge"
 DATE=$(date +%Y%m%d_%H%M%S)
 BACKUP_FILE="$BACKUP_DIR/mautrix_teams_$DATE.sql.gz"
 
@@ -2236,13 +2236,13 @@ if [ -z "$BACKUP_FILE" ]; then
 fi
 
 # Stop bridge
-systemctl stop mautrix-teams
+systemctl stop beeper-teams-bridge
 
 # Restore database
 gunzip < "$BACKUP_FILE" | psql -h localhost -U mautrix -d mautrix_teams
 
 # Start bridge
-systemctl start mautrix-teams
+systemctl start beeper-teams-bridge
 
 echo "Restore completed"
 ```
@@ -2274,8 +2274,8 @@ database:
 webhook:
   tls:
     enabled: true
-    cert_file: /etc/mautrix-teams/tls/cert.pem
-    key_file: /etc/mautrix-teams/tls/key.pem
+    cert_file: /etc/beeper-teams-bridge/tls/cert.pem
+    key_file: /etc/beeper-teams-bridge/tls/key.pem
     
   # Or use reverse proxy
   behind_proxy: true
@@ -2616,7 +2616,7 @@ encryption:
 
 **Community:**
 - Matrix Room: #teams:maunium.net
-- GitHub Issues: github.com/yourorg/mautrix-teams/issues
+- GitHub Issues: github.com/yourorg/beeper-teams-bridge/issues
 - Beeper Self-Hosting: #self-hosting:beeper.com
 
 **Tools:**

@@ -1,32 +1,88 @@
-# If you prefer the allow list template instead of the deny list, see community template:
-# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
-#
 # Binaries for programs and plugins
 *.exe
 *.exe~
 *.dll
 *.so
 *.dylib
+/beeper-teams-bridge
+/beeper-teams-bridge-*
+!docs/beeper-teams-bridge-*
+!cmd/beeper-teams-bridge/
 
 # Test binary, built with `go test -c`
 *.test
 
-# Code coverage profiles and other test artifacts
+# Output of the go coverage tool
 *.out
-coverage.*
-*.coverprofile
-profile.cov
+coverage.txt
+coverage.html
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+# Dependency directories
+vendor/
 
 # Go workspace file
 go.work
-go.work.sum
 
-# env file
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Bridge-specific files
+config.yaml
+registration.yaml
+*.log
+*.db
+*.sqlite
+*.sqlite3
+
+# Data directories
+data/
+logs/
+
+# Secrets and credentials
 .env
+.env.*
+secrets/
+*.pem
+*.key
+*.crt
 
-# Editor/IDE
-# .idea/
-# .vscode/
+# Build artifacts
+dist/
+build/
+*.tar.gz
+*.zip
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Docker volumes
+postgres_data/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.Trash-*
+
+# Testing
+test/fixtures/credentials.json
+test/fixtures/tokens.json
+.test_config.yaml
+
+# Documentation build
+docs/_build/
+site/
