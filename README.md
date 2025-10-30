@@ -219,7 +219,7 @@ sudo systemctl enable beeper-teams-bridge
 - **[Architecture Overview](docs/architecture.md)** - Technical design
 - **[Contributing Guide](CONTRIBUTING.md)** - How to contribute
 - **[API Documentation](docs/api.md)** - Internal API reference
-- **[Product Requirements](beeper-teams-bridge-prd.md)** - Complete PRD and spec
+- **[Product Requirements](docs/beeper-teams-bridge-prd.md)** - Complete PRD and spec
 
 ---
 
