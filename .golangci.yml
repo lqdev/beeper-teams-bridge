@@ -24,9 +24,6 @@ linters-settings:
     check-type-assertions: true
     check-blank: true
   
-  govet:
-    check-shadowing: true
-  
   gofmt:
     simplify: true
   
