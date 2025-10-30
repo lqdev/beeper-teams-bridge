@@ -1,0 +1,86 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+mautrix-teams
+mautrix-teams-*
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+coverage.txt
+coverage.html
+
+# Dependency directories
+vendor/
+
+# Go workspace file
+go.work
+
+# IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Bridge-specific files
+config.yaml
+registration.yaml
+*.log
+*.db
+*.sqlite
+*.sqlite3
+
+# Data directories
+data/
+logs/
+
+# Secrets and credentials
+.env
+.env.*
+secrets/
+*.pem
+*.key
+*.crt
+
+# Build artifacts
+dist/
+build/
+*.tar.gz
+*.zip
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Docker volumes
+postgres_data/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+.Trash-*
+
+# Testing
+test/fixtures/credentials.json
+test/fixtures/tokens.json
+.test_config.yaml
+
+# Documentation build
+docs/_build/
+site/
