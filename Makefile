@@ -1,4 +1,4 @@
-# Makefile for mautrix-teams
+# Makefile for beeper-teams-bridge
 # Run 'make help' for a list of available commands
 
 .PHONY: help
@@ -9,7 +9,7 @@ help: ## Show this help message
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {printf "  %-20s %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
 # Variables
-BINARY_NAME=mautrix-teams
+BINARY_NAME=beeper-teams-bridge
 VERSION?=$(shell git describe --tags --always --dirty)
 COMMIT=$(shell git rev-parse HEAD)
 BUILD_TIME=$(shell date -u +%Y-%m-%dT%H:%M:%SZ)
@@ -27,7 +27,7 @@ BUILD_FLAGS=-trimpath
 TEST_FLAGS=-v -race -coverprofile=coverage.txt -covermode=atomic
 
 # Directories
-CMD_DIR=./cmd/mautrix-teams
+CMD_DIR=./cmd/beeper-teams-bridge
 PKG_DIR=./pkg/...
 TEST_DIR=./test/...
 

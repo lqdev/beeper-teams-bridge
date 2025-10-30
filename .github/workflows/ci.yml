@@ -15,7 +15,7 @@ jobs:
         image: postgres:15
         env:
           POSTGRES_PASSWORD: test
-          POSTGRES_DB: mautrix_teams_test
+          POSTGRES_DB: beeper_teams_bridge_test
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -51,7 +51,7 @@ jobs:
     - name: Run tests
       run: go test -v -race -coverprofile=coverage.txt -covermode=atomic ./...
       env:
-        DATABASE_URL: postgres://postgres:test@localhost:5432/mautrix_teams_test?sslmode=disable
+        DATABASE_URL: postgres://postgres:test@localhost:5432/beeper_teams_bridge_test?sslmode=disable
     
     - name: Upload coverage
       uses: codecov/codecov-action@v4
@@ -60,7 +60,7 @@ jobs:
         flags: unittests
     
     - name: Build
-      run: go build -o mautrix-teams ./cmd/mautrix-teams
+      run: go build -o beeper-teams-bridge ./cmd/beeper-teams-bridge
 
   lint:
     runs-on: ubuntu-latest
@@ -109,6 +109,6 @@ jobs:
       with:
         context: .
         push: false
-        tags: mautrix-teams:latest
+        tags: beeper-teams-bridge:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max

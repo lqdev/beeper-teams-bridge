@@ -1,6 +1,6 @@
-# Contributing to mautrix-teams
+# Contributing to beeper-teams-bridge
 
-Thank you for your interest in contributing to mautrix-teams! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing to beeper-teams-bridge! This document provides guidelines and instructions for contributing.
 
 ## Code of Conduct
 
@@ -39,13 +39,13 @@ Before you begin, ensure you have:
 1. **Fork the repository**
    ```bash
    # Click "Fork" on GitHub, then clone your fork
-   git clone https://github.com/YOUR_USERNAME/mautrix-teams.git
-   cd mautrix-teams
+   git clone https://github.com/YOUR_USERNAME/beeper-teams-bridge.git
+   cd beeper-teams-bridge
    ```
 
 2. **Add upstream remote**
    ```bash
-   git remote add upstream https://github.com/ORIGINAL_OWNER/mautrix-teams.git
+   git remote add upstream https://github.com/ORIGINAL_OWNER/beeper-teams-bridge.git
    ```
 
 3. **Install dependencies**
@@ -72,7 +72,7 @@ Before you begin, ensure you have:
    ```bash
    # Using Docker
    docker run -d \
-     --name mautrix-teams-test-db \
+     --name beeper-teams-bridge-test-db \
      -e POSTGRES_PASSWORD=test \
      -e POSTGRES_DB=mautrix_teams_test \
      -p 5432:5432 \
@@ -582,4 +582,4 @@ go test -v -run TestName ./...   # Specific test
 
 ---
 
-Thank you for contributing to mautrix-teams! 🎉
+Thank you for contributing to beeper-teams-bridge! 🎉

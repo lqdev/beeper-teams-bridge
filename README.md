@@ -1,12 +1,12 @@
-# mautrix-teams
+# beeper-teams-bridge
 
 A Matrix bridge for Microsoft Teams, built with [mautrix-go](https://github.com/mautrix/go).
 
-[![CI Status](https://img.shields.io/github/actions/workflow/status/yourorg/mautrix-teams/ci.yml?branch=main)](https://github.com/yourorg/mautrix-teams/actions)
-[![Go Report Card](https://goreportcard.com/badge/github.com/yourorg/mautrix-teams)](https://goreportcard.com/report/github.com/yourorg/mautrix-teams)
-[![License](https://img.shields.io/github/license/yourorg/mautrix-teams)](LICENSE)
+[![CI Status](https://img.shields.io/github/actions/workflow/status/yourorg/beeper-teams-bridge/ci.yml?branch=main)](https://github.com/yourorg/beeper-teams-bridge/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/yourorg/beeper-teams-bridge)](https://goreportcard.com/report/github.com/yourorg/beeper-teams-bridge)
+[![License](https://img.shields.io/github/license/yourorg/beeper-teams-bridge)](LICENSE)
 [![Matrix Room](https://img.shields.io/matrix/teams:maunium.net?label=%23teams:maunium.net&logo=matrix&server_fqdn=maunium.net)](https://matrix.to/#/#teams:maunium.net)
-[![GitHub release](https://img.shields.io/github/v/release/yourorg/mautrix-teams)](https://github.com/yourorg/mautrix-teams/releases)
+[![GitHub release](https://img.shields.io/github/v/release/yourorg/beeper-teams-bridge)](https://github.com/yourorg/beeper-teams-bridge/releases)
 
 Bridge Microsoft Teams channels and chats to Matrix, allowing you to send and receive messages from Teams within your Matrix client (like Beeper).
 
@@ -76,43 +76,43 @@ See [docs/setup.md](docs/setup.md#azure-ad-setup) for detailed instructions.
 #### Using Docker (Recommended)
 ```bash
 # Create directory for the bridge
-mkdir mautrix-teams && cd mautrix-teams
+mkdir beeper-teams-bridge && cd beeper-teams-bridge
 
 # Pull the latest image
-docker pull ghcr.io/yourorg/mautrix-teams:latest
+docker pull ghcr.io/yourorg/beeper-teams-bridge:latest
 
 # Generate config
-docker run --rm -v $(pwd):/data ghcr.io/yourorg/mautrix-teams:latest -e
+docker run --rm -v $(pwd):/data ghcr.io/yourorg/beeper-teams-bridge:latest -e
 
 # Edit config.yaml with your settings
 nano config.yaml
 
 # Generate registration file
-docker run --rm -v $(pwd):/data ghcr.io/yourorg/mautrix-teams:latest -g
+docker run --rm -v $(pwd):/data ghcr.io/yourorg/beeper-teams-bridge:latest -g
 ```
 
 #### Using Pre-built Binary
 ```bash
 # Download latest release
-wget https://github.com/yourorg/mautrix-teams/releases/latest/download/mautrix-teams-linux-amd64
-chmod +x mautrix-teams-linux-amd64
-mv mautrix-teams-linux-amd64 mautrix-teams
+wget https://github.com/yourorg/beeper-teams-bridge/releases/latest/download/beeper-teams-bridge-linux-amd64
+chmod +x beeper-teams-bridge-linux-amd64
+mv beeper-teams-bridge-linux-amd64 beeper-teams-bridge
 
 # Generate config
-./mautrix-teams -e
+./beeper-teams-bridge -e
 
 # Edit config
 nano config.yaml
 
 # Generate registration
-./mautrix-teams -g
+./beeper-teams-bridge -g
 ```
 
 #### Building from Source
 ```bash
 # Clone the repository
-git clone https://github.com/yourorg/mautrix-teams.git
-cd mautrix-teams
+git clone https://github.com/yourorg/beeper-teams-bridge.git
+cd beeper-teams-bridge
 
 # Install dependencies
 go mod download
@@ -121,7 +121,7 @@ go mod download
 ./scripts/build.sh
 
 # Generate config
-./mautrix-teams -e
+./beeper-teams-bridge -e
 ```
 
 ### 2. Configuration
@@ -163,7 +163,7 @@ See [docs/configuration.md](docs/configuration.md) for all options.
 Add to your Synapse `homeserver.yaml`:
 ```yaml
 app_service_config_files:
-  - /path/to/mautrix-teams/registration.yaml
+  - /path/to/beeper-teams-bridge/registration.yaml
 ```
 
 Restart Synapse:
@@ -179,22 +179,22 @@ See [docs/setup.md#registering-appservice](docs/setup.md#registering-appservice)
 #### Docker
 ```bash
 docker run -d \
-  --name mautrix-teams \
+  --name beeper-teams-bridge \
   --restart unless-stopped \
   -v $(pwd):/data \
   -p 29319:29319 \
-  ghcr.io/yourorg/mautrix-teams:latest
+  ghcr.io/yourorg/beeper-teams-bridge:latest
 ```
 
 #### Systemd
 ```bash
-sudo systemctl start mautrix-teams
-sudo systemctl enable mautrix-teams
+sudo systemctl start beeper-teams-bridge
+sudo systemctl enable beeper-teams-bridge
 ```
 
 #### Manual
 ```bash
-./mautrix-teams
+./beeper-teams-bridge
 ```
 
 ### 5. Login
@@ -219,7 +219,7 @@ sudo systemctl enable mautrix-teams
 - **[Architecture Overview](docs/architecture.md)** - Technical design
 - **[Contributing Guide](CONTRIBUTING.md)** - How to contribute
 - **[API Documentation](docs/api.md)** - Internal API reference
-- **[Product Requirements](mautrix-teams-prd.md)** - Complete PRD and spec
+- **[Product Requirements](beeper-teams-bridge-prd.md)** - Complete PRD and spec
 
 ---
 
@@ -274,7 +274,7 @@ stats          - Show bridge statistics (admin only)
 ┌─────────────────┐         ┌──────────────────┐         ┌─────────────────┐
 │                 │         │                  │         │                 │
 │  Matrix Client  │◄───────►│  Matrix Bridge   │◄───────►│ Microsoft Teams │
-│    (Beeper)     │         │  (mautrix-teams) │         │   (Graph API)   │
+│    (Beeper)     │         │  (beeper-teams-bridge) │         │   (Graph API)   │
 │                 │         │                  │         │                 │
 └─────────────────┘         └──────────────────┘         └─────────────────┘
                                     │
@@ -300,8 +300,8 @@ See [docs/architecture.md](docs/architecture.md) for detailed technical informat
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourorg/mautrix-teams.git
-cd mautrix-teams
+git clone https://github.com/yourorg/beeper-teams-bridge.git
+cd beeper-teams-bridge
 
 # Install dependencies
 go mod download
@@ -316,13 +316,13 @@ make test
 make build
 
 # Run locally
-./mautrix-teams
+./beeper-teams-bridge
 ```
 
 ### Project Structure
 ```
-mautrix-teams/
-├── cmd/mautrix-teams/    # Main application entry point
+beeper-teams-bridge/
+├── cmd/beeper-teams-bridge/    # Main application entry point
 ├── pkg/connector/        # Bridge connector implementation
 ├── internal/             # Internal utilities
 ├── docs/                 # Documentation
@@ -363,9 +363,9 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for:
 **Bridge won't start**
 ```bash
 # Check logs
-docker logs mautrix-teams
+docker logs beeper-teams-bridge
 # or
-journalctl -u mautrix-teams -f
+journalctl -u beeper-teams-bridge -f
 ```
 
 **Login fails**
@@ -483,7 +483,7 @@ SOFTWARE.
 
 ### Get Help
 - **Matrix Room:** [#teams:maunium.net](https://matrix.to/#/#teams:maunium.net)
-- **GitHub Issues:** [Report bugs or request features](https://github.com/yourorg/mautrix-teams/issues)
+- **GitHub Issues:** [Report bugs or request features](https://github.com/yourorg/beeper-teams-bridge/issues)
 - **Documentation:** [Read the docs](docs/)
 
 ### Community
@@ -515,7 +515,7 @@ SOFTWARE.
 - [ ] Full Adaptive Card rendering
 - [ ] Teams apps integration
 
-See [GitHub Milestones](https://github.com/yourorg/mautrix-teams/milestones) for detailed progress.
+See [GitHub Milestones](https://github.com/yourorg/beeper-teams-bridge/milestones) for detailed progress.
 
 ---
 
@@ -532,7 +532,7 @@ See [GitHub Milestones](https://github.com/yourorg/mautrix-teams/milestones) for
 
 ## ⭐ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=yourorg/mautrix-teams&type=Date)](https://star-history.com/#yourorg/mautrix-teams&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=yourorg/beeper-teams-bridge&type=Date)](https://star-history.com/#yourorg/beeper-teams-bridge&Date)
 
 If you find this project useful, please consider giving it a star! ⭐
 

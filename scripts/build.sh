@@ -12,4 +12,4 @@ LDFLAGS="-X main.Version=$VERSION \
          -X main.GoVersion=$GO_VERSION \
          -s -w"
 
-go build -ldflags "$LDFLAGS" -o mautrix-teams ./cmd/mautrix-teams
+go build -ldflags "$LDFLAGS" -o beeper-teams-bridge ./cmd/beeper-teams-bridge

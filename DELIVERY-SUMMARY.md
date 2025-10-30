@@ -1,6 +1,6 @@
 # 📦 Complete Project Foundation - Delivery Summary
 
-**Project:** mautrix-teams (Microsoft Teams Matrix Bridge)  
+**Project:** beeper-teams-bridge (Microsoft Teams Matrix Bridge)  
 **License:** MIT  
 **Status:** ✅ Ready for Implementation  
 **Date:** October 30, 2025
@@ -15,7 +15,7 @@ Your complete, production-ready project foundation includes **everything** neede
 
 ## 📚 Complete Documentation Package
 
-### 1. **mautrix-teams-prd.md** (100+ pages)
+### 1. **beeper-teams-bridge-prd.md** (100+ pages)
 **The Complete Bible for This Project**
 
 ✅ Executive Summary & Business Case  
@@ -292,11 +292,11 @@ Your complete, production-ready project foundation includes **everything** neede
 
 ```bash
 # 1. Create repository and clone
-git clone https://github.com/YOURNAME/mautrix-teams.git
-cd mautrix-teams
+git clone https://github.com/YOURNAME/beeper-teams-bridge.git
+cd beeper-teams-bridge
 
 # 2. Copy all foundation files (you have them!)
-# - mautrix-teams-prd.md
+# - beeper-teams-bridge-prd.md
 # - PROJECT-KICKOFF.md
 # - README.md
 # - CONTRIBUTING.md
@@ -306,7 +306,7 @@ cd mautrix-teams
 # - Makefile
 
 # 3. Initialize Go module
-go mod init github.com/YOURNAME/mautrix-teams
+go mod init github.com/YOURNAME/beeper-teams-bridge
 go get maunium.net/go/mautrix/bridgev2@latest
 
 # 4. Create directory structure
@@ -327,7 +327,7 @@ git push
 
 Before starting implementation, verify you have:
 
-- [x] mautrix-teams-prd.md (100+ pages)
+- [x] beeper-teams-bridge-prd.md (100+ pages)
 - [x] PROJECT-KICKOFF.md (30 pages)
 - [x] README.md (15 pages)
 - [x] CONTRIBUTING.md (20 pages)

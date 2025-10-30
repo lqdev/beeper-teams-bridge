@@ -49,7 +49,7 @@ body:
     id: version
     attributes:
       label: Bridge Version
-      description: What version of mautrix-teams are you running?
+      description: What version of beeper-teams-bridge are you running?
       placeholder: v1.0.0
     validations:
       required: true

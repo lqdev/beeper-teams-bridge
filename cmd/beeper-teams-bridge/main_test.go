@@ -16,7 +16,7 @@ func TestVersion(t *testing.T) {
 		t.Error("URL should not be empty")
 	}
 
-	expectedName := "mautrix-teams"
+	expectedName := "beeper-teams-bridge"
 	if Name != expectedName {
 		t.Errorf("Expected name to be %s, got %s", expectedName, Name)
 	}

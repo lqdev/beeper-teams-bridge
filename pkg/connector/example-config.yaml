@@ -113,7 +113,7 @@ database:
     # The database URI.
     #   SQLite: File path to database file. Example: file:filename.db?_txlock=immediate
     #   Postgres: Connection string. For example, postgres://user:password@host/database?sslmode=disable
-    uri: postgres://user:password@localhost/mautrix-teams?sslmode=disable
+    uri: postgres://user:password@localhost/beeper-teams-bridge?sslmode=disable
     # Maximum number of connections.
     max_open_conns: 20
     max_idle_conns: 2

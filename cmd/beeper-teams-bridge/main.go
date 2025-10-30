@@ -15,7 +15,7 @@ var (
 
 // Bridge version information
 var (
-	Name    = "mautrix-teams"
+	Name    = "beeper-teams-bridge"
 	URL     = "https://github.com/lqdev/beeper-teams-bridge"
 	Version = "0.1.0"
 )

@@ -4,8 +4,10 @@
 *.dll
 *.so
 *.dylib
-/mautrix-teams
-/mautrix-teams-*
+/beeper-teams-bridge
+/beeper-teams-bridge-*
+!docs/beeper-teams-bridge-*
+!cmd/beeper-teams-bridge/
 
 # Test binary, built with `go test -c`
 *.test

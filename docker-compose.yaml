@@ -3,25 +3,25 @@ version: '3.8'
 services:
   postgres:
     image: postgres:15-alpine
-    container_name: mautrix-teams-db
+    container_name: beeper-teams-bridge-db
     restart: unless-stopped
     environment:
-      POSTGRES_USER: mautrix
-      POSTGRES_PASSWORD: mautrix
-      POSTGRES_DB: mautrix-teams
+      POSTGRES_USER: beeper
+      POSTGRES_PASSWORD: beeper
+      POSTGRES_DB: beeper-teams-bridge
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U mautrix"]
+      test: ["CMD-SHELL", "pg_isready -U beeper"]
       interval: 10s
       timeout: 5s
       retries: 5
 
-  mautrix-teams:
+  beeper-teams-bridge:
     build: .
-    container_name: mautrix-teams
+    container_name: beeper-teams-bridge
     restart: unless-stopped
     depends_on:
       postgres:
