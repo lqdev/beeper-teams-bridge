@@ -20,15 +20,15 @@ type HomeserverConfig struct {
 
 // AppserviceConfig contains appservice registration details
 type AppserviceConfig struct {
-	Address string `yaml:"address"`
-	Hostname string `yaml:"hostname"`
-	Port     int    `yaml:"port"`
-	ID       string `yaml:"id"`
-	BotUsername     string `yaml:"bot_username"`
-	BotDisplayname  string `yaml:"bot_displayname"`
-	BotAvatar       string `yaml:"bot_avatar"`
-	ASToken         string `yaml:"as_token"`
-	HSToken         string `yaml:"hs_token"`
+	Address        string `yaml:"address"`
+	Hostname       string `yaml:"hostname"`
+	Port           int    `yaml:"port"`
+	ID             string `yaml:"id"`
+	BotUsername    string `yaml:"bot_username"`
+	BotDisplayname string `yaml:"bot_displayname"`
+	BotAvatar      string `yaml:"bot_avatar"`
+	ASToken        string `yaml:"as_token"`
+	HSToken        string `yaml:"hs_token"`
 }
 
 // BridgeConfig contains bridge-specific settings
