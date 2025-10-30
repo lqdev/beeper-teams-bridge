@@ -1,0 +1,128 @@
+{
+	"name": "Beeper Teams Bridge",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "devcontainer",
+	"workspaceFolder": "/workspace",
+	
+	// Features to add to the dev container
+	"features": {
+		"ghcr.io/devcontainers/features/github-cli:1": {
+			"version": "latest"
+		},
+		"ghcr.io/devcontainers/features/azure-cli:1": {
+			"version": "latest",
+			"extensions": "account,webapp"
+		},
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"version": "latest",
+			"moby": true,
+			"dockerDashComposeVersion": "v2"
+		},
+		"ghcr.io/devcontainers/features/git:1": {
+			"version": "latest",
+			"ppa": false
+		}
+	},
+
+	// Configure tool-specific properties
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				// Go language support
+				"golang.go",
+				// GitHub Copilot
+				"github.copilot",
+				"github.copilot-chat",
+				// Database tools
+				"mtxr.sqltools",
+				"mtxr.sqltools-driver-pg",
+				// Docker
+				"ms-azuretools.vscode-docker",
+				// YAML
+				"redhat.vscode-yaml",
+				// Markdown
+				"yzhang.markdown-all-in-one",
+				"davidanson.vscode-markdownlint",
+				// Git
+				"eamodio.gitlens",
+				"github.vscode-pull-request-github",
+				// Testing
+				"hbenl.vscode-test-explorer",
+				"ethan-reesor.vscode-go-test-adapter",
+				// Utilities
+				"editorconfig.editorconfig",
+				"streetsidesoftware.code-spell-checker"
+			],
+			"settings": {
+				"go.toolsManagement.checkForUpdates": "local",
+				"go.useLanguageServer": true,
+				"go.gopath": "/go",
+				"go.goroot": "/usr/local/go",
+				"go.lintTool": "golangci-lint",
+				"go.lintOnSave": "package",
+				"go.formatTool": "goimports",
+				"go.testFlags": ["-v"],
+				"go.coverOnSave": false,
+				"go.coverageDecorator": {
+					"type": "gutter"
+				},
+				"editor.formatOnSave": true,
+				"editor.codeActionsOnSave": {
+					"source.organizeImports": "explicit"
+				},
+				"files.eol": "\n",
+				"files.insertFinalNewline": true,
+				"files.trimTrailingWhitespace": true,
+				"terminal.integrated.defaultProfile.linux": "bash",
+				"sqltools.connections": [
+					{
+						"name": "PostgreSQL - beeper-teams-bridge",
+						"driver": "PostgreSQL",
+						"server": "postgres",
+						"port": 5432,
+						"database": "beeper-teams-bridge",
+						"username": "beeper",
+						"password": "beeper"
+					}
+				]
+			}
+		}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally
+	"forwardPorts": [
+		29319,  // Bridge appservice port
+		5432    // PostgreSQL
+	],
+
+	// Port labels for better identification
+	"portsAttributes": {
+		"29319": {
+			"label": "Bridge Appservice",
+			"onAutoForward": "notify"
+		},
+		"5432": {
+			"label": "PostgreSQL",
+			"onAutoForward": "ignore"
+		}
+	},
+
+	// Set container-specific settings
+	"remoteEnv": {
+		"GO111MODULE": "on",
+		"GOPATH": "/go",
+		"PATH": "${containerEnv:PATH}:/go/bin"
+	},
+
+	// Run commands after the container is created
+	"postCreateCommand": "bash .devcontainer/postCreate.sh",
+
+	// Comment out to connect as root instead. More info: https://aka.ms/dev-containers-non-root
+	"remoteUser": "vscode",
+
+	// Mount the .azure directory for Azure CLI credentials
+	"mounts": [
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.azure,target=/home/vscode/.azure,type=bind,consistency=cached",
+		"source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh-host,type=bind,consistency=cached,readonly"
+	]
+}

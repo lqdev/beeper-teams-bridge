@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ..:/workspace:cached
+    command: /bin/sh -c "while sleep 1000; do :; done"
+    network_mode: service:postgres
+    environment:
+      - GO111MODULE=on
+      - GOPATH=/go
+      - DATABASE_URL=postgres://beeper:beeper@localhost:5432/beeper-teams-bridge?sslmode=disable
+
+  postgres:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: beeper
+      POSTGRES_PASSWORD: beeper
+      POSTGRES_DB: beeper-teams-bridge
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+      - "29319:29319"  # Bridge appservice port
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U beeper"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres-data:

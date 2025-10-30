@@ -27,6 +27,11 @@ beeper-teams-bridge is a Matrix bridge for Microsoft Teams, built with [mautrix-
 
 ```
 beeper-teams-bridge/
+├── .devcontainer/              # DevContainer configuration for Codespaces
+│   ├── devcontainer.json       # DevContainer configuration
+│   ├── Dockerfile              # Development container image
+│   ├── docker-compose.yml      # Dev services (PostgreSQL)
+│   └── postCreate.sh           # Post-creation setup script
 ├── cmd/beeper-teams-bridge/    # Main application entry point
 │   ├── main.go                 # Application entry point and CLI
 │   └── main_test.go            # Basic tests for main package
@@ -38,8 +43,11 @@ beeper-teams-bridge/
 │   ├── setup.md                # Setup instructions
 │   ├── configuration.md        # Configuration reference
 │   ├── architecture.md         # Technical architecture
-│   └── troubleshooting.md      # Troubleshooting guide
+│   ├── troubleshooting.md      # Troubleshooting guide
+│   ├── codespaces.md           # GitHub Codespaces guide
+│   └── azure-cli-setup.md      # Azure CLI setup guide
 ├── scripts/                    # Build and utility scripts
+│   └── setup-azure-ad.sh       # Azure AD setup automation
 ├── Makefile                    # Build automation
 ├── Dockerfile                  # Container image definition
 └── docker-compose.yaml         # Development environment
@@ -330,6 +338,48 @@ Key dependencies:
 - [Go by Example](https://gobyexample.com/)
 - [Effective Go](https://go.dev/doc/effective_go)
 
+## DevContainer / GitHub Codespaces
+
+### Overview
+
+The project includes a full DevContainer configuration for GitHub Codespaces and VS Code Remote Containers. This provides a consistent, pre-configured development environment.
+
+### Configuration Files
+
+- `.devcontainer/devcontainer.json` - Main DevContainer configuration
+- `.devcontainer/Dockerfile` - Development container image with Go 1.21+
+- `.devcontainer/docker-compose.yml` - Services configuration (PostgreSQL)
+- `.devcontainer/postCreate.sh` - Post-creation setup script
+
+### Features
+
+- **Pre-installed Tools**: Go 1.21+, golangci-lint, goimports, gosec, Azure CLI, GitHub CLI
+- **Database**: PostgreSQL 15 running on localhost:5432
+- **VS Code Extensions**: Go, GitHub Copilot, Docker, SQLTools, GitLens, etc.
+- **Port Forwarding**: 29319 (bridge), 5432 (PostgreSQL)
+
+### Usage
+
+Users can start developing immediately by:
+1. Clicking "Open in GitHub Codespaces" badge in README
+2. Waiting for environment setup (2-5 minutes)
+3. Running `make build` or `make test`
+
+### Documentation
+
+- `docs/codespaces.md` - Complete Codespaces usage guide
+- `docs/azure-cli-setup.md` - Azure AD setup using CLI
+
+### Azure CLI Setup
+
+The DevContainer includes Azure CLI for programmatic Azure AD application setup. This is particularly useful for:
+- Automated setups
+- AI coding agents
+- CI/CD pipelines
+- Developers who prefer CLI over portal
+
+Script available at `scripts/setup-azure-ad.sh` automates the entire Azure AD application creation and permission configuration.
+
 ## Notes for AI Assistance
 
 - This is a Matrix bridge project following mautrix conventions
@@ -339,3 +389,5 @@ Key dependencies:
 - The project uses standard Go tooling and conventions
 - Tests should mock external API calls to avoid real API dependencies
 - Always maintain backward compatibility unless explicitly breaking changes
+- DevContainer configuration provides a complete development environment
+- Azure CLI can be used for all Azure configuration tasks as an alternative to the portal
